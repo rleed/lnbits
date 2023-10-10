@@ -7,6 +7,7 @@ from loguru import logger
 from lnbits.utils.cache import cache
 
 currencies = {
+    "HRS": "LETS Hours (Local Exchange Trading System)",
     "AED": "United Arab Emirates Dirham",
     "AFN": "Afghan Afghani",
     "ALL": "Albanian Lek",
@@ -183,6 +184,12 @@ class Provider(NamedTuple):
 
 
 exchange_rate_providers = {
+    "satoshidnc": Provider(
+        "Satoshi, D.N.C.",
+        "satoshidnc.com",
+        "https://satoshidnc.com/api/v1/lets/{from}/{to}",
+        lambda data, replacements: data["price"],
+    ),
     # https://binance-docs.github.io/apidocs/spot/en/#symbol-price-ticker
     "binance": Provider(
         "Binance",
